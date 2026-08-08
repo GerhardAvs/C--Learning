@@ -20,10 +20,7 @@ My implementations and notes on **Data Structures and Algorithms**, developed wh
 - C++
 - C
 
-## 🎯 Goal
-
-Build a strong foundation in algorithms, problem solving and computational thinking.
-
+```text
 Data-Structures-and-Algorithms/
 │
 ├── README.md
@@ -59,3 +56,4 @@ Data-Structures-and-Algorithms/
 └── Problems/
     ├── LeetCode/
     └── HackerRank/
+```
