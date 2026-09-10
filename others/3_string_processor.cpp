@@ -30,9 +30,16 @@ int main() {
         }
     }
 
+    // Invertir la frase
+    char invertida[200];
+    for (int i = 0; i < longitud; i++) {
+        invertida[i] = frase[longitud - 1 - i];
+    }
+    invertida[longitud] = '\0';
 
     cout << "Numero de palabras: " << numPalabras << endl;
     cout << "Numero de vocales: " << numVocales << endl;
+    cout << "Frase invertida: " << invertida << endl;
 
     return 0;
 }
