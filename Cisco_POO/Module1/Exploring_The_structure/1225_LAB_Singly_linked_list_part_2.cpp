@@ -25,18 +25,51 @@ class List
 {
 public:
   List();
+  ~List();
   void push_front(int value);
   bool pop_front(int &value);
 private:
   Node* head;
 };
 
-// ...
+List::List() : head(nullptr)
+{
+}
+
+List::~List()
+{
+  while (head != nullptr)
+  {
+    Node* to_delete = head;
+    head = head->next;
+    delete to_delete;
+  }
+}
+
+void List::push_front(int value)
+{
+  Node* new_head = new Node(value);
+  new_head->next = head;
+  head = new_head;
+}
+
+bool List::pop_front(int &value)
+{
+  if (head == nullptr)
+    return false;
+
+  Node* popped = head;
+  head = popped->next;
+  value = popped->value;
+  delete popped;
+
+  return true;
+}
 
 int main()
 {
   List list;
-  //
+
   list.push_front(1);
   list.push_front(2);
   list.push_front(3);

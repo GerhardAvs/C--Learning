@@ -10,14 +10,19 @@ private:
   int reserved;
 };
 
-void FlightBooking::printStatus()
-{
-  // print report here
-}
-
 FlightBooking::FlightBooking(int id, int capacity, int reserved)
 {
-  // Save data to members
+  this->id = id;
+  this->capacity = capacity;
+  this->reserved = reserved;
+}
+
+void FlightBooking::printStatus()
+{
+  int percentage = reserved * 100 / capacity;
+
+  std::cout << "Flight " << id << " : " << reserved << "/" << capacity
+             << " (" << percentage << "%) seats reserved" << std::endl;
 }
 
 int main() {

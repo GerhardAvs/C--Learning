@@ -31,7 +31,7 @@ class Square
 {
 public:
   Square(double side);
-  void set_side(double newSide);
+  void set_side(double side);
   void print();
 
 private:
@@ -45,20 +45,19 @@ Square::Square(double side)
   this->area = side * side;
 }
 
-void Square::set_side(double newSide)
+void Square::set_side(double side)
 {
-  if(newSide < 0){
-    return; // ignora el cambio si es negativo
-  }
-  side = newSide;
-  area = newSide * newSide;
+  if (side < 0)
+    return;   // ignoramos el cambio si es negativo
+
+  this->side = side;
+  this->area = side * side;
 }
 
 void Square::print()
 {
   cout << "Square: side=" << side << " area=" << area << endl;
 }
-
 
 int main()
 {
@@ -69,7 +68,7 @@ int main()
   s.set_side(2.0);
   s.print();
 
-  s.set_side(-33.0);
+  s.set_side(-33.0);   // esto se ignora, side sigue siendo 2.0
   s.print();
 
   return 0;

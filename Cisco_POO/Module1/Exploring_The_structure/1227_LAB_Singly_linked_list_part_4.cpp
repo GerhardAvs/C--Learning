@@ -1,29 +1,3 @@
-// An empty list:
-//
-//  Node*
-// +------+
-// | head |-->nullptr
-// +------+
-//
-//  Node*
-// +------+
-// | tail |-->nullptr
-// +------+
-//
-//
-//
-// A list with two elements:
-//
-//  Node*      Node         Node
-// +------+   +-----+      +-----+
-// | head |-->|value|  +-->|value|
-// +------+   +-----+  |   +-----+
-//            |next |--+   |next |-->nullptr
-//            +-----+      +-----+
-//                           ^
-// +------+                  |
-// | tail |------------------+
-// +------+
 #include <iostream>
 
 using namespace std;
@@ -44,85 +18,88 @@ class List
 {
 public:
   List();
+  ~List();
   void push_front(int value);
   bool pop_front(int &value);
   void push_back(int value);
-  int size()
+  int size();
 private:
-  // other members you may have used
   Node* head;
   Node* tail;
+  int   count;
 };
 
-List::List() : head(nullptr), tail(nullptr)
+List::List() : head(nullptr), tail(nullptr), count(0)
 {
+}
+
+List::~List()
+{
+  while (head != nullptr)
+  {
+    Node* to_delete = head;
+    head = head->next;
+    delete to_delete;
+  }
 }
 
 void List::push_front(int value)
 {
-  // You need to fix this part!
-  // The tail pointer needs to be modified only when the first element is added
   Node* new_head = new Node(value);
   new_head->next = head;
-  head=new_head;
+  head = new_head;
+
+  if (tail == nullptr)      // la lista estaba vacía: el nuevo nodo es también el último
+    tail = new_head;
+
+  count++;
 }
 
-// All of your previously written methods may require a little fixing
+bool List::pop_front(int &value)
+{
+  if (head == nullptr)
+    return false;
 
-// START
-// +------+   +-----+      +-----+
-// | head |-->|  X  |  +-->|  Y  |
-// +------+   +-----+  |   +-----+
-//            |next |--+   |next |-->nullptr
-//            +-----+      +-----+
-//                           ^
-// +------+                  |
-// | tail |------------------+
-// +------+
-//
-// STEP 1
-//                                            new Node
-// +------+   +-----+      +-----+             +-----+
-// | head |-->|  X  |  +-->|  Y  |             |  Z  |
-// +------+   +-----+  |   +-----+             +-----+
-//            |next |--+   |next |-->nullptr   |next |-->nullptr
-//            +-----+      +-----+             +-----+
-//                           ^
-// +------+                  |
-// | tail |------------------+
-// +------+
-//
-// STEP 2
-//
-// +------+   +-----+      +-----+       +-----+
-// | head |-->|  X  |  +-->|  Y  |   +-->|  Z  |
-// +------+   +-----+  |   +-----+   |   +-----+
-//            |next |--+   |next |--+    |next |-->nullptr
-//            +-----+      +-----+       +-----+
-//                           ^
-// +------+                  |
-// | tail |------------------+
-// +------+
-//
-// STEP 3
-// +------+   +-----+      +-----+       +-----+
-// | head |-->|  X  |  +-->|  Y  |   +-->|  Z  |
-// +------+   +-----+  |   +-----+   |   +-----+
-//            |next |--+   |next |--+    |next |-->nullptr
-//            +-----+      +-----+       +-----+
-//                                          ^
-// +------+                                 |
-// | tail |---------------------------------+
-// +------+
+  Node* popped = head;
+  head = popped->next;
+
+  if (head == nullptr)      // sacamos el único nodo que había: la lista vuelve a estar vacía
+    tail = nullptr;
+
+  value = popped->value;
+  delete popped;
+  count--;
+
+  return true;
+}
+
 void List::push_back(int value)
 {
-  // implement me!
+  Node* new_node = new Node(value);   // STEP 1: crear el nuevo nodo, aislado
+
+  if (tail == nullptr)                // la lista estaba vacía
+  {
+    head = new_node;
+    tail = new_node;
+  }
+  else
+  {
+    tail->next = new_node;            // STEP 2: el último nodo actual apunta al nuevo
+    tail = new_node;                  // STEP 3: tail avanza para apuntar al nuevo último
+  }
+
+  count++;
+}
+
+int List::size()
+{
+  return count;
 }
 
 int main()
 {
   List list;
-  //
+
   list.push_back(1);
   list.push_back(2);
   list.push_back(3);
