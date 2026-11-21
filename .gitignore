@@ -1,34 +1,52 @@
-# VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
+# Carpeta de ejecutables
+build/
+
+# Archivos objeto
+*.o
+*.obj
+*.ko
+*.elf
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Librerías
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+
+# Ejecutables
+*.exe
+*.out
+*.app
+
+# Archivos de depuración
+*.dSYM/
+*.pdb
+*.ilk
+
+# Dependencias generadas
+*.d
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+cmake-build-*/
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+*~
 
 # Sistema operativo
 .DS_Store
 Thumbs.db
 
-# Dependencias
-node_modules/
-vendor/
-
-# Archivos de build/compilación
-dist/
-build/
-out/
-*.exe
-*.o
-*.obj
-
-# Logs
-*.log
-
-# Variables de entorno
-.env
-.env.local
-
-# Archivos temporales
-*.tmp
-*.swp
+# Bases de datos SQLite generadas
+*.db
